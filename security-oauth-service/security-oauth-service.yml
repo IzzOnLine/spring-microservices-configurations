@@ -1,0 +1,32 @@
+spring:
+  ## Spring DATASOURCE (DataSourceAutoConfiguration & DataSourceProperties)
+  datasource:
+    url: jdbc:postgresql://localhost:5432/postgres
+    username: postgres
+    # Using environment variable ENCRYPT_KEY=ENCRYPT_KEY
+    # Getting the value with POST localhost:8888/encrypt and the password in its body
+    # Raw password: postgres
+    password: "{cipher}b35012a35e4c726c9eea32f4aa5b86bca360fa8c1474f61d4762699f94e1ce5a"
+  jpa:
+    properties:
+      hibernate:
+        ddl-auto: update
+        dialect: org.hibernate.dialect.PostgreSQL95Dialect
+        jdbc:
+          lob:
+            # With Java >= 9, to avoid:
+            # SQLFeatureNotSupportedException: Method PgConnection.createClob() is not yet implemented
+            non_contextual_creation: true
+
+security:
+  jwt:
+    token:
+      # Raw secretKey: 72=83eH97$7f408adAC
+      secretKey: "{cipher}7ff4027d6047fd05cbd9111ace147fa4c76f9b70578720dd3285b1115a545350770a4e56800387033b4b1e050779cb93"
+      signatureAlgorithm: "HMACSHA512"
+
+cache:
+  oauthClient:
+    entryCapacity: 2
+    expireInMinutes: 30
+    name: oauthClientCache

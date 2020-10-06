@@ -1,0 +1,17 @@
+spring:
+  ## Spring DATASOURCE (DataSourceAutoConfiguration & DataSourceProperties)
+  datasource:
+    driverClassName: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/postgres
+    username: postgres
+    # Using environment variable ENCRYPT_KEY=ENCRYPT_KEY
+    # Getting the value with POST localhost:8888/encrypt and the password in its body
+    # Raw password: postgres
+    password: "{cipher}942a39b421ccba1230f76a06d5480d0d16bcf5b4ef8d22ee764aed6a4daaaeca"
+
+security:
+  restApi:
+    authenticationInformation: http://localhost:5555/security/oauth/check_token?token={token}
+    clientId: Spring5Microservices
+    # Raw password: Spring5Microservices
+    clientPassword: "{cipher}9f746b78f2d521d96cacf9fa65913048ef971dc242030ca5d8c7a56ddf90093cb58dfe71b66255df8ffe1d543680fe88"

@@ -1,0 +1,35 @@
+zuul:
+  # To exclude the registration of all eureka service ID based routes
+  ignored-services: '*'
+  routes:
+    microservice:
+      path: /microservice/**
+      # By default, the proxy prefix is stripped from the request before the request is forwarded by
+      stripPrefix: false
+    security-oauth-service:
+      path: /security/**
+      # By default, the proxy prefix is stripped from the request before the request is forwarded by
+      stripPrefix: false
+  # Exclude Authorization from sensitive headers
+  sensitiveHeaders: Cookie,Set-Cookie
+
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            # Time in milliseconds after which the caller will observe a timeout and walk away from the command execution
+            timeoutInMilliseconds: 30000000
+
+# Timeouts configuration for requests proxied through Zuul
+ribbon:
+  ConnectTimeout: 5000000
+  ReadTimeout: 10000000
+
+# List of comma separated microservices with a suitable documentation of its Rest API
+restApi:
+  documentedServices: microservice
+
+
+ # TOGLIERE 3 ZERI DA  timeoutInMilliseconds, ConnectTimeout, ReadTimeout!!! messi per debug
